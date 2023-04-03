@@ -30,7 +30,7 @@ unsigned long timerDelay = 10000;
 
 String currencies[6][2] = {
 	{"Bitcoin","BTC"},
-	{"Ethereum","ETC"},
+	{"Ethereum","ETH"},
 	{"Dogecoin","DOGE"},
 	{"Solana","SOL"},
 	{"BNB","BNB"},
