@@ -18,7 +18,7 @@ const char* ssid = "Galaxy M51EE8C";
 const char* password = "pgep2193";
 
 //Your Domain name with URL path or IP address with path
-String serverName = "http://rest-sandbox.coinapi.io/v1/exchangerate";
+String serverName = "http://rest.coinapi.io/v1/exchangerate/";
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
@@ -37,28 +37,16 @@ String currencies[6][2] = {
 	{"Litecoin","LTC"},
 } ;
 
-
-
 void setup() {
-
-  /* Serial.begin(115200); */ 
   Serial.begin(9600);
   WiFi.begin(ssid, password);
-  /* Serial.println("Connecting"); */
   while(WiFi.status() != WL_CONNECTED) {
     delay(500);
-    /* Serial.print("."); */
   }
-  /* Serial.println(""); */
-  /* Serial.print("Connected to WiFi network with IP Address: "); */
-  /* Serial.println(WiFi.localIP()); */
- 
-  /* Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading."); */
 }
 
 void loop() {
   // Send an HTTP POST request depending on timerDelay
-  /* if ((millis() - lastTime) > timerDelay) { */
     //Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
       WiFiClient client;
@@ -67,7 +55,8 @@ void loop() {
 	for(int i=0;i<6;i++){
       /* String serverPath = serverName + "/BTC/USD?apikey=BCEC2DF6-46FC-4F25-9C9A-0A61A647AF47"; */
 	  String serverPath = serverName + currencies[i][1];
-	  serverPath = serverPath + "/USD?apikey=5F67685F-A31A-4C86-8AB5-792024A7FAA9";
+	  /* serverPath = serverPath + "/USD?apikey=5F67685F-A31A-4C86-8AB5-792024A7FAA9"; */
+	  serverPath = serverPath + "/USD?apikey=DDE4D197-BF2F-4878-AD11-0F086A0900FB";
 		/* serverPath = serverPath + "/USD?apikey=BCEC2DF6-46FC-4F25-9C9A-0A61A647AF47"; */
 
 
@@ -85,12 +74,12 @@ void loop() {
 		/* Serial.println(serverPath); */
         /* Serial.print("HTTP Response code: "); */
         /* Serial.println(httpResponseCode); */
-		char json[] =
-      "{\"time\":\"123456\",\"asset_id_base\":\"13518sada120\",\"asset_id_quote\":\"9876\",\"rate\":\"assd\"}";
+		/* char json[] = */
+      /* "{\"time\":\"123456\",\"asset_id_base\":\"13518sada120\",\"asset_id_quote\":\"9876\",\"rate\":\"assd\"}"; */
 
         String payload = http.getString();
 		StaticJsonDocument<500> doc;
-		deserializeJson(doc,json);
+		deserializeJson(doc,payload);
         /* Serial.println(doc["rate"]); */
 		/* serializeJson(doc["time"],Serial); */
 		/* serializeJson(doc["asset_id_base"],Serial); */
@@ -98,7 +87,7 @@ void loop() {
 		/* serializeJson(doc["rate"],Serial); */
 		serializeJsonPretty(doc,Serial);
 		
-		char * charPayload = strdup(String(payload).c_str());
+		/* char * charPayload = strdup(String(payload).c_str()); */
 		/* Serial.print(payload); */
       }
       else {

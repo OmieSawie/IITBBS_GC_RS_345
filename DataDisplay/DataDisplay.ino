@@ -88,6 +88,7 @@ void loop() { // run over and over
 		
 		char* timeCh, *asset_id_baseCh,*asset_id_quoteCh,*rateCh;
 		timeCh = strdup(time.c_str());
+		timeCh = strtok(timeCh,".");
 		asset_id_baseCh =  strdup(asset_id_base.c_str());
 		asset_id_quoteCh = strdup(asset_id_quote.c_str());
 		rateCh = strdup(rate.c_str());
@@ -115,8 +116,8 @@ void print_text(byte x_pos, byte y_pos, char *text, byte text_size, uint16_t col
 
 
 void displayData(char* chS, char* aib, char* aiq, char* rate){
-	print_text(10,10,chS,1,ST7735_WHITE);
-	print_text(30,40,aib,1,ST7735_WHITE);
+	print_text(0,10,chS,1,ST7735_WHITE);
+	print_text(30,40,aib,2,ST7735_WHITE);
 	print_text(30,80,aiq,1,ST7735_WHITE);
 	print_text(30,100,rate,1,ST7735_WHITE);
 }
